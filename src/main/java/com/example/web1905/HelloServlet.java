@@ -1,5 +1,6 @@
 package com.example.web1905;
 
+import com.example.web1905.beans.PointBean;
 import com.example.web1905.logic.Main;
 import com.example.web1905.logic.data.Point;
 import jakarta.servlet.ServletException;
@@ -25,6 +26,8 @@ public class HelloServlet extends HttpServlet {
         double step = Double.parseDouble(request.getParameter("step"));
         List<Point> points = new Main().tabulate(start, finish, step);
 
+        request.setAttribute("pb", new PointBean(points));
+        request.getRequestDispatcher("/tab.jsp").forward(request, response);
     }
 
     public void destroy() {
